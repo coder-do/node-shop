@@ -31,4 +31,11 @@ const checkout = (req, res, next) => {
     res.render('shop/cart', { path: '/checkout', title: 'Checkout Page' })
 }
 
-module.exports = { shopPage, getIndex, cart, checkout, getOrders };
+const getProduct = (req, res, next) => {
+    const id = req.params.id;
+    Product.findById(id, pr => res.render('shop/product-details', {prod: pr, title: 'Details', path: '/product/:id'}));
+}
+
+module.exports = { shopPage, getIndex, cart, 
+    checkout, getOrders, getProduct
+};

@@ -1,0 +1,62 @@
+<%- include('../includes/head.ejs') %> 
+    <%- include('../includes/nav.ejs') %>
+    <!-- <main style="text-align: center;">
+        <h1><%= prod.title %></h1>
+        <div>
+            <img src="<%= prod.image %>" alt="<%= prod.title %>">
+        </div>
+        <h2><%= prod.price %></h2>
+        <p><%= prod.description %></p>
+        <form action="/cart" method="post">
+            <button class="btn" type="submit">Add to Cart</button>
+        </form>
+    </main> -->
+    <main style="text-align: center; margin: 0 auto;">
+        <div class="item">
+            <img src="<%= prod.image %>" alt="item" />
+            <h2><%= prod.title %></h2>
+                <p>Price: <em><%= prod.price %>$</em>
+            </p>
+            <form action="/cart" method="post">
+                <button class="add-to-cart" type="submit">Add to Cart</button>
+            </form>
+        </div>
+    </main>
+    <style>
+        .item {
+            background-color: rgb(238, 201, 100);
+            margin: 0 auto;
+            width: 300px;
+            padding: 10px;
+            height: 410px;
+            border-radius: 4%;
+        }
+        .item img {
+            display: block;
+            margin: auto;
+            width: 100%;
+            margin-bottom: 44px;
+            margin-top: 6px;
+            border-radius: 4%;
+        }
+        h2 {
+            font-size: 16px;
+            display: block;
+            margin: 0 0 10px 0;
+            padding: 0 0 5px 0;
+        }
+        button {
+            border: 1px solid #722A1B;
+            padding: 4px 14px;
+            background-color: #fff;
+            color: #722A1B;
+            text-transform: uppercase;
+            margin: 5px 0;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        span {
+            float: right;
+        }
+    </style>
+<%- include('../includes/end.ejs') %> 
