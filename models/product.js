@@ -5,7 +5,7 @@ const p = path.join(
     path.dirname(process.mainModule.filename),
     'data',
     'products.json'
-  );
+);
   
 const getProducts = cb => {
     fs.readFile(p, (err, fileContent) => {

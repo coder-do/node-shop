@@ -1,24 +1,14 @@
 <%- include('../includes/head.ejs') %> 
     <%- include('../includes/nav.ejs') %>
-    <!-- <main style="text-align: center;">
-        <h1><%= prod.title %></h1>
-        <div>
-            <img src="<%= prod.image %>" alt="<%= prod.title %>">
-        </div>
-        <h2><%= prod.price %></h2>
-        <p><%= prod.description %></p>
-        <form action="/cart" method="post">
-            <button class="btn" type="submit">Add to Cart</button>
-        </form>
-    </main> -->
     <main style="text-align: center; margin: 0 auto;">
         <div class="item">
             <img src="<%= prod.image %>" alt="item" />
             <h2><%= prod.title %></h2>
-                <p>Price: <em><%= prod.price %>$</em>
-            </p>
+            <p style="margin: 0;"><%= prod.description %> </p>
+            <p>Price: <em><%= prod.price %>$</em></p>
             <form action="/cart" method="post">
                 <button class="add-to-cart" type="submit">Add to Cart</button>
+                <input type="hidden" name='id' value="<%= prod.id %> " />
             </form>
         </div>
     </main>
@@ -28,14 +18,14 @@
             margin: 0 auto;
             width: 300px;
             padding: 10px;
-            height: 410px;
+            height: 435px;
             border-radius: 4%;
         }
         .item img {
             display: block;
             margin: auto;
             width: 100%;
-            margin-bottom: 44px;
+            margin-bottom: 30px;
             margin-top: 6px;
             border-radius: 4%;
         }
