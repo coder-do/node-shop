@@ -1,10 +1,11 @@
 const express = require('express');
-const { shopPage, getIndex, checkout, 
-    cart, getOrders, getProduct, addProduct } = require('../controllers/shop');
+const { shopPage, getIndex, checkout,
+    cart, getOrders, getProduct, addProduct,
+    postDeleteCartItem } = require('../controllers/shop');
 
 const router = express.Router();
 
-router.get('/' , getIndex);
+router.get('/', getIndex);
 
 router.get('/products', shopPage);
 
@@ -13,6 +14,8 @@ router.get('/product/:id', getProduct);
 router.get('/cart', cart);
 
 router.post('/cart', addProduct);
+
+router.post('/delete-cart-item', postDeleteCartItem);
 
 router.get('/orders', getOrders);
 

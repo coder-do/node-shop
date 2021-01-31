@@ -4,6 +4,10 @@
 .pnp.js
 package-lock.json
 
+
+# data file
+cart.json
+
 # production
 /build
 
