@@ -1,5 +1,6 @@
 const express = require('express');
-const { productPage, product, getProducts, editProductPage } = require('../controllers/admin');
+const { productPage, product, getProducts, 
+    editProductPage, postEditProductPage, postDeleteProduct } = require('../controllers/admin');
 
 const adminRouter = express.Router();
 
@@ -12,6 +13,8 @@ adminRouter.post('/product' , product);
 
 adminRouter.get('/edit-product/:id', editProductPage);
 
-adminRouter.post('/edit-product');
+adminRouter.post('/edit-product', postEditProductPage);
+
+adminRouter.post('/delete-product', postDeleteProduct);
 
 module.exports = { adminRouter };
