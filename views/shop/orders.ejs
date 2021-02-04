@@ -1,6 +1,22 @@
 <%- include('../includes/head.ejs') %> 
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1>Nothing there!</h1>
+        <div style="margin-top: 80px;"></div>
+        <% if (prod.length <= 0) { %>
+            <h1 style=" margin-top: 80px;">Nothing there!</h1>
+        <% } else { %>
+            <ul>
+                <% prod.forEach(order => { %>
+                    <li>
+                        <h1># <%= order.id %></h1>
+                        <ul>
+                            <% order.products.forEach(product => { %>
+                                <li><%= product.title %> (<%= product.orderItem.quantity %>)</li>
+                            <% }); %>
+                        </ul>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
     </main>
 <%- include('../includes/end.ejs') %> 
