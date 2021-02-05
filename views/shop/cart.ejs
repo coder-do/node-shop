@@ -9,7 +9,7 @@
                         <div style="display: flex;">
                             <p><%= p.title %> (<%= p.cartItems.quantity %>)</p>
                             <form action="/delete-cart-item" method="POST">
-                                <input type="hidden" value="<%= p.id %>" name="id">
+                                <input type="hidden" value="<%= p._id %>" name="id">
                                 <button class="btn" type="submit" style="margin: 9px 0 0 6px;">Delete</button>
                             </form>
                         </div>

@@ -1,8 +1,7 @@
 const Product = require('../models/product');
-const Order = require('../models/order');
 
 const shopPage = (req, res, next) => {
-    Product.findAll()
+    Product.fetchAll()
         .then(products => {
             res.render('shop/product-list', {
                 title: 'All Products', prod: products,
@@ -15,7 +14,7 @@ const shopPage = (req, res, next) => {
 }
 
 const getIndex = (req, res, next) => {
-    Product.findAll()
+    Product.fetchAll()
         .then(products => {
             res.render('shop/index', {
                 prod: products,
@@ -113,9 +112,9 @@ const checkout = (req, res, next) => {
 
 const getProduct = (req, res, next) => {
     const id = req.params.id;
-    Product.findAll({ where: { id: id } })
+    Product.findById(id)
         .then(products => {
-            res.render('shop/product-details', { prod: products[0], title: 'Details', path: '/product/:id' })
+            res.render('shop/product-details', { prod: products, title: 'Details', path: '/product/:id' })
         })
         .catch(err => {
             console.log(err);
