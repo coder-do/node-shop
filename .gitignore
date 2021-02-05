@@ -5,6 +5,9 @@
 package-lock.json
 
 
+# data
+/data
+
 # data file
 cart.json
 

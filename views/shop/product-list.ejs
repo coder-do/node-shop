@@ -1,7 +1,7 @@
 <%- include('../includes/head.ejs') %> 
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1 style="text-align: center;">My Products</h1>
+        <h1 style="text-align: center; margin-top: 80px;">My Products</h1>
         <div class="grid">
             <% if(prod.length > 0) { %> 
                 <% for(let p of prod) { %> 
@@ -17,10 +17,10 @@
                             <p class="product__description"><%= p.description %></p>
                         </div>
                         <div class="card__actions">
-                            <a href="/product/<%= p.id %> " class="btn">Details</a>
+                            <a href="/product/<%= p._id %> " class="btn">Details</a>
                             <form action="/cart" method="post">
                                 <button class="btn" type="submit">Add to Cart</button>
-                                <input type="hidden" name='id' value="<%= p.id %> " />
+                                <input type="hidden" name='id' value="<%= p._id %> " />
                             </form>
                         </div>
                     </article>

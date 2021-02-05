@@ -12,13 +12,13 @@ main {
 	width: 100%;
 	height: 3.5rem;
 	background-color: #dbc441;
-	padding: 0 1.5rem;
 }
 
 .main-header__nav {
 	height: 100%;
 	display: flex;
-	align-items: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .main-header__item-list {
@@ -44,10 +44,12 @@ main {
 	color: #12861b;
 }
 .grid {
-	display: flex;
+    display: flex;
+    width: 65vw;
+    margin: 0 auto;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	align-items: stretch;
+	/* align-items: stretch; */
 }
 
 .card {
