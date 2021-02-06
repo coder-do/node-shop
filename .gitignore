@@ -11,6 +11,9 @@ package-lock.json
 # data file
 cart.json
 
+# environment
+.env
+
 # production
 /build
 
