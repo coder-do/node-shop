@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const parser = require('body-parser');
+// dotenv
+require('dotenv').config();
 // db
 const { db } = require('./utils/db');
 // express
