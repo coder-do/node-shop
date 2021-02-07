@@ -29,17 +29,6 @@ const getIndex = (req, res, next) => {
         });
 }
 
-const getOrders = (req, res, next) => {
-    req.user
-        .getOrders({ include: ['products'] })
-        .then(orders => {
-            res.render('shop/orders', {
-                title: 'Your Orders', prod: orders,
-                path: '/orders', active2: true
-            });
-        })
-        .catch(err => console.log(err));
-}
 
 const cart = (req, res, next) => {
     req.user.fetchCart()
@@ -87,30 +76,21 @@ const getProduct = (req, res, next) => {
         });
 };
 
-const postOrder = (req, res, next) => {
-    let fetchedCart;
+const getOrders = (req, res, next) => {
     req.user
-        .getCart()
-        .then(cart => {
-            fetchedCart = cart;
-            return cart.getProducts();
+        .getOrder()
+        .then(orders => {
+            res.render('shop/orders', {
+                title: 'Your Orders', prod: orders,
+                path: '/orders', active2: true
+            });
         })
-        .then(products => {
-            return req.user
-                .createOrder()
-                .then(order => {
-                    return order.addProducts(
-                        products.map(product => {
-                            product.orderItem = { quantity: product.cartItems.quantity };
-                            return product;
-                        })
-                    );
-                })
-                .catch(err => console.log(err));
-        })
-        .then(result => {
-            return fetchedCart.setProducts(null);
-        })
+        .catch(err => console.log(err));
+}
+
+const postOrder = (req, res, next) => {
+    req.user
+        .addOrder()
         .then(result => {
             res.redirect('/orders');
         })
