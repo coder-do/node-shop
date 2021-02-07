@@ -1,21 +1,27 @@
 const express = require('express');
 const path = require('path');
 const parser = require('body-parser');
+// dotenv
+require('dotenv').config();
 // db
 const { db } = require('./utils/db');
-// express
-const app = express();
 // admin routes
 const { adminRouter } = require('./routes/admin');
 const { router } = require('./routes/shop');
 const { errorRouter } = require('./routes/error-page')
+// user
+const User = require('./models/user');
+// express
+const app = express();
 
 // user find
 app.use((req, res, next) => {
-    // User.findByPk(1)
-    //     .then(user => { req.user = user; next() })
-    //     .catch(err => console.log(err))
-    next();
+    User.findById('601ead1d4a1f3399d619533e')
+        .then(user => {
+            req.user = new User(user.name, user.email, user.cart, user._id);
+            next();
+        })
+        .catch(err => console.log(err))
 })
 
 // view engines
