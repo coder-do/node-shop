@@ -3,11 +3,11 @@
     <main class="cart">
         <div style="margin-top: 80px;"></div>
         <% if (products.length > 0) { %>
-            <ul>
+            <ul class="cart__item-list">
                 <% products.forEach(p => { %>
-                    <li>
-                        <div style="display: flex;">
-                            <p><%= p.title %> (<%= p.quantity %>)</p>
+                    <li class="cart__item">
+                        <div style="display: flex; justify-content: space-between;">
+                            <p><%= p.title %> (x<%= p.quantity %>)</p>
                             <form action="/delete-cart-item" method="POST">
                                 <input type="hidden" value="<%= p._id %>" name="id">
                                 <button class="btn" type="submit" style="margin: 9px 0 0 6px;">Delete</button>
@@ -16,9 +16,11 @@
                     </li>
                 <% }) %>
             </ul>
-            <form action="/order-page" method="POST">
-                <button type="submit" class="btn" style="margin-left: 3vw;">Order now</button>
-            </form>
+            <div class="centered">
+                <form action="/order-page" method="POST">
+                    <button type="submit" class="btn">Order now</button>
+                </form>
+            </div>
         <% } else { %>
             <h1>No Products in Card!</h1>
         <% } %>
