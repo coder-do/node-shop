@@ -5,13 +5,13 @@
         <% if (prod.length <= 0) { %>
             <h1 style=" margin-top: 80px;">Nothing there!</h1>
         <% } else { %>
-            <ul>
+            <ul class="orders">
                 <% prod.forEach(order => { %>
-                    <li>
+                    <li class="orders__item">
                         <h1># <%= order._id %></h1>
-                        <ul>
-                            <% order.products.forEach(product => { %>
-                                <li><%= product.title %> (<%= product.orderItem.quantity %>)</li>
+                        <ul class="orders__products">
+                            <% order.items.forEach(product => { %>
+                                <li  class="orders__products-item"><%= product.title %> (x<%= product.quantity %>)  <b><%= product.quantity * product.price %>$</b></li>
                             <% }); %>
                         </ul>
                     </li>

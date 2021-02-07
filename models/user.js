@@ -30,6 +30,7 @@ class User {
             });
         }
         const updatedCart = { items: updatedCartItems };
+        // const upd = { items: [{ _id: new mongodb.ObjectId(this._id), quantity: 1 }] }
         const db = getDb();
         return db
             .collection('user')
@@ -64,6 +65,34 @@ class User {
                     };
                 });
             });
+    }
+
+    addOrder() {
+        const db = getDb();
+        return this.fetchCart()
+            .then(prods => {
+                const order = {
+                    items: prods,
+                    user: {
+                        _id: new mongodb.ObjectId(this._id),
+                        name: this.name
+                    }
+                };
+                return db.collection('orders').insertOne(order);
+            })
+            .then(res => {
+                this.cart = { items: [] }
+                return db
+                    .collection('user')
+                    .updateOne({ _id: new mongodb.ObjectId(this._id) }, { $set: { cart: { items: [] } } })
+            })
+    }
+
+    getOrder() {
+        const db = getDb();
+        return db.collection('orders')
+            .find({ 'user._id': new mongodb.ObjectId(this._id) })
+            .toArray();
     }
 
     static findById(id) {
