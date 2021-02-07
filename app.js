@@ -18,7 +18,7 @@ const app = express();
 app.use((req, res, next) => {
     User.findById('601ead1d4a1f3399d619533e')
         .then(user => {
-            req.user = user;
+            req.user = new User(user.name, user.email, user.cart, user._id);
             next();
         })
         .catch(err => console.log(err))
