@@ -29,17 +29,6 @@ const getIndex = (req, res, next) => {
         });
 }
 
-const getOrders = (req, res, next) => {
-    req.user
-        .getOrders({ include: ['products'] })
-        .then(orders => {
-            res.render('shop/orders', {
-                title: 'Your Orders', prod: orders,
-                path: '/orders', active2: true
-            });
-        })
-        .catch(err => console.log(err));
-}
 
 const cart = (req, res, next) => {
     req.user.fetchCart()
@@ -86,6 +75,18 @@ const getProduct = (req, res, next) => {
             console.log(err);
         });
 };
+
+const getOrders = (req, res, next) => {
+    req.user
+        .getOrders({ include: ['products'] })
+        .then(orders => {
+            res.render('shop/orders', {
+                title: 'Your Orders', prod: orders,
+                path: '/orders', active2: true
+            });
+        })
+        .catch(err => console.log(err));
+}
 
 const postOrder = (req, res, next) => {
     let fetchedCart;
