@@ -3,15 +3,15 @@
     <main>
         <div style="margin-top: 80px;"></div>
         <% if (prod.length <= 0) { %>
-            <h1 style=" margin-top: 80px;">Nothing there!</h1>
+            <h1 style="text-align: center; margin-top: 80px;">Nothing there!</h1>
         <% } else { %>
             <ul class="orders">
                 <% prod.forEach(order => { %>
                     <li class="orders__item">
                         <h1># <%= order._id %></h1>
                         <ul class="orders__products">
-                            <% order.items.forEach(product => { %>
-                                <li  class="orders__products-item"><%= product.title %> (x<%= product.quantity %>)  <b><%= product.quantity * product.price %>$</b></li>
+                            <% order.products.forEach(prods => { %>
+                                <li  class="orders__products-item"><%= prods.product.title %> (x<%= prods.quantity %>)  <b><%= prods.quantity * prods.product.price %>$</b></li>
                             <% }); %>
                         </ul>
                     </li>

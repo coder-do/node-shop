@@ -7,9 +7,9 @@
                 <% products.forEach(p => { %>
                     <li class="cart__item">
                         <div style="display: flex; justify-content: space-between;">
-                            <p><%= p.title %> (x<%= p.quantity %>)</p>
-                            <form action="/delete-cart-item" method="POST">
-                                <input type="hidden" value="<%= p._id %>" name="id">
+                            <p><%= p.id.title %> (x<%= p.quantity %>)</p>
+                            <form action="/delete-card-item" method="POST">
+                                <input type="hidden" value="<%= p.id._id %>" name="id">
                                 <button class="btn" type="submit" style="margin: 9px 0 0 6px;">Delete</button>
                             </form>
                         </div>
