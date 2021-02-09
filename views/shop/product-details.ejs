@@ -6,7 +6,7 @@
             <h2><%= prod.title %></h2>
             <p style="margin: 0;"><%= prod.description %> </p>
             <p>Price: <em><%= prod.price %>$</em></p>
-            <form action="/cart" method="post">
+            <form action="/card" method="post">
                 <button class="add-to-cart" type="submit">Add to Card</button>
                 <input type="hidden" name='id' value="<%= prod._id %> " />
             </form>
