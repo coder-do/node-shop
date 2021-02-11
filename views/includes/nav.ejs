@@ -7,18 +7,42 @@
             <li class="main-header__item">
                 <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
             </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/card' ? 'active' : '' %>" href="/card">Card</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/admin/product-page' ? 'active' : '' %>" href="/admin/product-page">Add Product</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a>
-            </li>
+            <% if (isAuth) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/card' ? 'active' : '' %>" href="/card">Card</a>
+                </li>
+            <% } %>
+            <% if (isAuth) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/product-page' ? 'active' : '' %>" href="/admin/product-page">Add Product</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a>
+                </li>
+            <% } %>
         </ul>
+        <div style="position: absolute; right: 1.5em;">
+            <ul class="main-header__item-list">
+                <% if (!isAuth) { %>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
+                    </li>                 
+                    <li class="main-header__item">
+                        <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
+                    </li>                 
+                <% } %>
+                <% if (isAuth) { %>
+                    <li class="main-header__item">
+                        <form action="/logout" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= token %> ">
+                            <button style="text-transform: none;" class="btn" type="submit">Logout</button>
+                        </form>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
     </nav>
 </header>
