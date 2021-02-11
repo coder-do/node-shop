@@ -10,6 +10,7 @@
                             <p><%= p.id.title %> (x<%= p.quantity %>)</p>
                             <form action="/delete-card-item" method="POST">
                                 <input type="hidden" value="<%= p.id._id %>" name="id">
+                                <input type="hidden" name="_csrf" value="<%= token %>">
                                 <button class="btn" type="submit" style="margin: 9px 0 0 6px;">Delete</button>
                             </form>
                         </div>
@@ -18,6 +19,7 @@
             </ul>
             <div class="centered">
                 <form action="/order-page" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= token %>">
                     <button type="submit" class="btn">Order now</button>
                 </form>
             </div>

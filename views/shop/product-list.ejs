@@ -17,10 +17,18 @@
                         </div>
                         <div class="card__actions">
                             <a href="/product/<%= p._id %> " class="btn">Details</a>
-                            <form action="/card" method="post">
-                                <button class="btn" type="submit">Add to Card</button>
-                                <input type="hidden" name='id' value="<%= p._id %> " />
-                            </form>
+                            <% if (isAuth) { %>
+                                <form action="/card" method="POST">
+                                    <button class="btn" type="submit">Add to Card</button>
+                                    <input type="hidden" name='id' value="<%= p._id %> " />
+                                    <input type="hidden" name="_csrf" value="<%= token %>">
+                                </form>
+                            <% } else { %>
+                                <form action="/login">
+                                    <button class="btn" type="submit">Login to buy</button>
+                                    <input type="hidden" name='id' value="<%= p._id %> " />
+                                </form>
+                            <% } %>
                         </div>
                     </article>
                 <% } %> 

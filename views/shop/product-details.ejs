@@ -6,10 +6,18 @@
             <h2><%= prod.title %></h2>
             <p style="margin: 0;"><%= prod.description %> </p>
             <p>Price: <em><%= prod.price %>$</em></p>
-            <form action="/card" method="post">
-                <button class="add-to-cart" type="submit">Add to Card</button>
-                <input type="hidden" name='id' value="<%= prod._id %> " />
-            </form>
+            <% if (isAuth) { %>
+                <form action="/card" method="POST">
+                    <button class="add-to-cart" type="submit">Add to Card</button>
+                    <input type="hidden" name='id' value="<%= prod._id %> " />
+                    <input type="hidden" name="_csrf" value="<%= token %>">
+                </form>
+            <% } else { %>
+                <form action="/login">
+                    <button class="add-to-cart" type="submit">Login to buy</button>
+                    <input type="hidden" name='id' value="<%= prod._id %> " />
+                </form>
+            <% } %>
         </div>
     </main>
     <style>

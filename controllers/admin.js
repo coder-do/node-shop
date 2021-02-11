@@ -18,16 +18,19 @@ const product = (req, res, next) => {
 const productPage = (req, res, next) => {
     res.render('admin/edit-product', {
         title: 'Add product', path: '/admin/product-page',
-        active: true, editing: false
+        active: true, editing: false, isAuth: req.session.isAuth
     });
 }
 
 const getProducts = (req, res, next) => {
+    if (!req.session.isAuth) {
+        res.redirect('/login')
+    }
     Product.find()
         .then(products => {
             res.render('admin/products', {
                 title: 'Admin Products', prod: products,
-                path: '/admin/products'
+                path: '/admin/products', isAuth: req.session.isAuth
             });
         })
         .catch(err => {
@@ -75,7 +78,7 @@ const editProductPage = (req, res, next) => {
                 title: 'Edit Product',
                 path: '/admin/edit-product',
                 editing: id,
-                product: product
+                product: product, isAuth: req.session.isAuth
             });
         })
         .then(result => {
