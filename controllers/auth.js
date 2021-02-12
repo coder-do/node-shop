@@ -1,10 +1,16 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey('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')
+
 const getAuth = (req, res, next) => {
+    let msg = req.flash('error');
+    msg = msg.length > 0 ? msg[0] : null;
     res.render('auth/login', {
         path: '/login', active: true,
-        title: 'Login Page', isAuth: req.session.isAuth
+        title: 'Login Page',
+        error: msg
     })
 };
 
@@ -13,7 +19,7 @@ const postAuth = (req, res, next) => {
     const password = req.body.password;
     User.findOne({ email: email })
         .then(user => {
-            if (!user) { return res.redirect('/login') }
+            if (!user) { req.flash('error', 'User does`not exist. Try again'); return res.redirect('/login') }
             bcrypt.compare(password, user.password)
                 .then(match => {
                     if (match) {
@@ -23,6 +29,7 @@ const postAuth = (req, res, next) => {
                             res.redirect('/');
                         })
                     }
+                    req.flash('error', 'Invalid email or password. Try again');
                     res.redirect('/login')
                 })
         })
@@ -36,9 +43,11 @@ const postLogout = (req, res, next) => {
 };
 
 const getSignup = (req, res, next) => {
+    let msg = req.flash('error');
+    msg = msg.length > 0 ? msg[0] : null;
     res.render('auth/signup', {
         path: '/signup', title: 'Signup',
-        isAuth: req.session.isAuth
+        error: msg
     })
 };
 
@@ -48,7 +57,7 @@ const postSignup = (req, res, next) => {
     const confirmPassword = req.body.confirmPassword;
     User.findOne({ email: email })
         .then(doc => {
-            if (doc) { return res.redirect('/signup') }
+            if (doc) { req.flash('error', 'User exists. Try another data'); return res.redirect('/signup') }
             return bcrypt.hash(password, 12)
                 .then(pass => {
                     const user = new User({
@@ -58,7 +67,16 @@ const postSignup = (req, res, next) => {
                     });
                     return user.save();
                 })
-                .then(() => { return res.redirect('/login') });
+                .then(() => {
+                    return sgMail.send({
+                        to: email,
+                        from: 'meruzh.kiloyan.00@gmail.com',
+                        subject: 'Signup succeed',
+                        text: 'Congrats! You have signed up succesfully',
+                        html: '<h1>Congrats! You have signed up succesfully</h1>',
+                    }).then(() => { res.redirect('/login'); console.log('ddd') })
+                        .catch(err => console.log(err.response.body.errors))
+                })
         })
 
 };
