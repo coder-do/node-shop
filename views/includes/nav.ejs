@@ -37,7 +37,7 @@
                 <% if (isAuth) { %>
                     <li class="main-header__item">
                         <form action="/logout" method="POST">
-                            <input type="hidden" name="_csrf" value="<%= token %> ">
+                            <input type="hidden" name="_csrf" value="<%= token %>">
                             <button style="text-transform: none;" class="btn" type="submit">Logout</button>
                         </form>
                     </li>

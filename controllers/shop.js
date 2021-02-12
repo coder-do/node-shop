@@ -6,7 +6,7 @@ const shopPage = (req, res, next) => {
         .then(products => {
             res.render('shop/product-list', {
                 title: 'All Products', prod: products,
-                path: '/products', active2: true, isAuth: req.session.isAuth
+                path: '/products', active2: true,
             });
         })
         .catch(err => {
@@ -39,7 +39,7 @@ const card = (req, res, next) => {
             res.render('shop/card', {
                 path: '/card',
                 title: 'Your Card',
-                products: products.card.items, isAuth: req.session.isAuth
+                products: products.card.items,
             });
         })
         .catch(err => console.log(err))
@@ -65,14 +65,14 @@ const addProduct = (req, res, next) => {
 }
 
 const checkout = (req, res, next) => {
-    res.render('shop/card', { path: '/checkout', title: 'Checkout Page', isAuth: req.session.isAuth })
+    res.render('shop/card', { path: '/checkout', title: 'Checkout Page' })
 }
 
 const getProduct = (req, res, next) => {
     const id = req.params.id;
     Product.findById(id)
         .then(products => {
-            res.render('shop/product-details', { prod: products, title: 'Details', path: '/product/:id', isAuth: req.session.isAuth })
+            res.render('shop/product-details', { prod: products, title: 'Details', path: '/product/:id', })
         })
         .catch(err => {
             console.log(err);
@@ -84,7 +84,7 @@ const getOrders = (req, res, next) => {
         .then(orders => {
             res.render('shop/orders', {
                 title: 'Your Orders', prod: orders,
-                path: '/orders', active2: true, isAuth: req.session.isAuth
+                path: '/orders', active2: true,
             });
         })
         .catch(err => console.log(err));
@@ -101,7 +101,7 @@ const postOrder = (req, res, next) => {
             const order = new Order({
                 products: prod,
                 user: {
-                    name: req.user.name,
+                    email: req.user.email,
                     userId: req.user
                 }
             })

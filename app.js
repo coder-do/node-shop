@@ -6,6 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 
 const csurf = require('csurf');
+const flash = require('connect-flash');
 
 require('dotenv').config();
 
@@ -30,7 +31,9 @@ const store = new MongoStore({
 app.set('view engine', 'ejs');
 app.set('views', 'views')
 
-app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false, store: store }))
+app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false, store: store }));
+
+app.use(flash())
 
 app.use(parser.urlencoded({ extended: false }));
 

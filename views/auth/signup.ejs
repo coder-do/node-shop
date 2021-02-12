@@ -5,18 +5,22 @@
             <form style="margin: 0 auto; width: 20em;" class="login-form" action="/signup" method="POST">
                 <div class="form-control">
                     <label for="email">E-Mail</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" required>
                 </div>
                 <div class="form-control">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" required>
                 </div>
                 <div class="form-control">
                     <label for="confirmPassword">Confirm Password</label>
                     <input type="password" name="confirmPassword" id="confirmPassword">
                 </div>
                 <input type="hidden" name="_csrf" value="<%= token %>">
-                <button class="btn" type="submit">Signup</button>
+                <% if (error) { %>
+                    <div style="color: red;margin: -10px 0px 10px 0;"><%= error %></div>
+                <% } %>
+                <button style="display: block; margin: 30px auto 0; width: 100px;" 
+                    class="btn" type="submit">Signup</button>
             </form>
         </main>
 <%- include('../includes/end.ejs') %> 
