@@ -23,7 +23,7 @@ const productPage = (req, res, next) => {
 }
 
 const getProducts = (req, res, next) => {
-    if (!req.session.isAuth) {
+    if (!req.session.isAdmin) {
         res.redirect('/login')
     }
     Product.find()
@@ -85,9 +85,18 @@ const editProductPage = (req, res, next) => {
             res.redirect('/admin/products');
         })
         .catch(err => console.log(err));
-}
+};
+
+const getAdmin = (req, res, next) => {
+    res.render('auth/admin', {
+        title: 'Admin Page',
+        path: '/admin',
+        error: false
+    })
+};
 
 module.exports = {
     product, productPage, getProducts,
-    editProductPage, postEditProductPage, postDeleteProduct
+    editProductPage, postEditProductPage, postDeleteProduct,
+    getAdmin
 };

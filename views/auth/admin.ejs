@@ -1,0 +1,27 @@
+<%- include('../includes/head.ejs') %> 
+<header class="main-header" style="position: fixed;">
+    <nav class="main-header__nav">
+        <h2>Admin Login Page</h2>
+    </nav>
+</header>
+        <main>
+            <div  style="margin-top: 80px;"></div>            
+            <form class="login-form" action="/login" method="POST" style="display: block; margin: 0 auto;
+                width: 270px;">
+                <div class="form-control">
+                    <label for="email">Username</label>
+                    <input type="text" name="email" id="email">
+                </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                <input type="hidden" name="_csrf" value="<%= token %>">
+                <% if (error) { %>
+                    <div style="color: red;margin: -10px 0px 10px 0;"><%= error %></div>
+                <% } %>
+                <button style="display: block; margin: 30px auto 0; width: 100px;" 
+                    class="btn" type="submit">Login</button>
+            </form>    
+        </main>
+<%- include('../includes/end.ejs') %> 
