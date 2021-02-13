@@ -23,14 +23,25 @@ const postAuth = (req, res, next) => {
             bcrypt.compare(password, user.password)
                 .then(match => {
                     if (match) {
+                        if (email === 'admin') {
+                            req.session.isAdmin = true;
+                            req.session.user = user;
+                            return req.session.save(err => {
+                                res.redirect('/admin/products')
+                            })
+                        }
                         req.session.isAuth = true;
                         req.session.user = user;
                         return req.session.save(err => {
                             res.redirect('/');
                         })
                     }
-                    req.flash('error', 'Invalid email or password. Try again');
-                    res.redirect('/login')
+                    if (email !== 'admin') {
+                        req.flash('error', 'Invalid email or password. Try again');
+                        res.redirect('/login')
+                    } else {
+                        res.redirect('/admin')
+                    }
                 })
         })
         .catch(err => res.redirect('/login'))
