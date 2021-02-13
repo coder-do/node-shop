@@ -4,7 +4,6 @@ const { productPage, product, getProducts,
     editProductPage, postEditProductPage, postDeleteProduct,
     getAdmin } = require('../controllers/admin');
 
-const isAuth = require('../middleware/is-auth');
 const isAdmin = require('../middleware/is-admin');
 
 const adminRouter = express.Router();

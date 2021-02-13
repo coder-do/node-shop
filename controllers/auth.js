@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
+const { validationResult } = require('express-validator/check');
+
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -66,30 +68,38 @@ const postSignup = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
-    User.findOne({ email: email })
-        .then(doc => {
-            if (doc) { req.flash('error', 'User exists. Try another data'); return res.redirect('/signup') }
-            return bcrypt.hash(password, 12)
-                .then(pass => {
-                    const user = new User({
-                        email: email,
-                        password: pass,
-                        card: { items: [] }
-                    });
-                    return user.save();
-                })
-                .then(() => {
-                    return sgMail.send({
-                        to: email,
-                        from: 'meruzh.kiloyan.00@gmail.com',
-                        subject: 'Signup succeed',
-                        text: 'Congrats! You have signed up succesfully',
-                        html: '<h1>Congrats! You have signed up succesfully</h1>',
-                    }).then(() => res.redirect('/login'))
-                        .catch(err => console.log(err.response.body.errors))
-                })
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+        return res.status(422).render('auth/signup', {
+            path: '/signup', title: 'Signup',
+            error: error.array()[0].msg
         })
-
+    }
+    else {
+        User.findOne({ email: email })
+            .then(doc => {
+                if (doc) { req.flash('error', 'User exists. Try another data'); return res.redirect('/signup') }
+                return bcrypt.hash(password, 12)
+                    .then(pass => {
+                        const user = new User({
+                            email: email,
+                            password: pass,
+                            card: { items: [] }
+                        });
+                        return user.save();
+                    })
+                    .then(() => {
+                        return sgMail.send({
+                            to: email,
+                            from: 'meruzh.kiloyan.00@gmail.com',
+                            subject: 'Signup succeed',
+                            text: 'Congrats! You have signed up succesfully',
+                            html: '<h1>Congrats! You have signed up succesfully</h1>',
+                        }).then(() => res.redirect('/login'))
+                            .catch(err => console.log(err.response.body.errors))
+                    })
+            })
+    }
 };
 
 module.exports = { getAuth, postAuth, postLogout, getSignup, postSignup };
