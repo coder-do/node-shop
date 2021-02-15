@@ -11,10 +11,6 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" required>
                 </div>
-                <div class="form-control">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword">
-                </div>
                 <input type="hidden" name="_csrf" value="<%= token %>">
                 <% if (error) { %>
                     <div style="color: red;margin: -10px 0px 10px 0;"><%= error %></div>
