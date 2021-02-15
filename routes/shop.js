@@ -2,7 +2,7 @@ const express = require('express');
 
 const { shopPage, getIndex, checkout,
     card, getOrders, getProduct, addProduct,
-    postDeleteCardItem, postOrder } = require('../controllers/shop');
+    postDeleteCardItem, postOrder, getInvoice } = require('../controllers/shop');
 
 const isAuth = require('../middleware/is-auth');
 
@@ -24,6 +24,9 @@ router.post('/delete-card-item', isAuth, postDeleteCardItem);
 
 router.get('/orders', isAuth, getOrders);
 
+router.get('/invoice/:id', isAuth, getInvoice);
+
 router.get('/checkout', isAuth, checkout);
+
 
 module.exports = { router };
