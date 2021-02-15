@@ -31,10 +31,18 @@
                             <% } %>
                         </div>
                     </article>
-                <% } %> 
+                <% } %>                
             <% } else { %>
                 <h2 style="text-align: center;">No Product!</h2>
             <% } %>  
         </div>
+        <%- include('../includes/pagination.ejs', {
+            currentPage: currentPage,
+            prevPage: prevPage,
+            nextPage: nextPage,
+            hasPrevPage: hasPrevPage,
+            hasNextPage: hasNextPage,
+            lastPage: lastPage
+        })  %>
     </main>
 <%- include('../includes/end.ejs') %> 

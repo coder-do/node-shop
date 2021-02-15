@@ -8,7 +8,13 @@
             <ul class="orders">
                 <% prod.forEach(order => { %>
                     <li class="orders__item">
-                        <h1># <%= order._id %></h1>
+                        <div style="display: flex;">
+                            <h1 style="margin-right: 20px;"># <%= order._id %></h1>
+                            <a style="text-decoration: none;
+                                font-size: 18px;
+                                line-height: 17px;" 
+                            href="/invoice/<%= order._id %>" target="_blank">download invoice</a>
+                        </div>
                         <ul class="orders__products">
                             <% order.products.forEach(prods => { %>
                                 <li  class="orders__products-item"><%= prods.product.title %> (x<%= prods.quantity %>)  <b><%= prods.quantity * prods.product.price %>$</b></li>

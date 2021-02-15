@@ -1,0 +1,25 @@
+<section class="pagination" style="display: flex; justify-content: center;">
+    <% if (currentPage !== 1 && prevPage !== 1) { %>
+        <a href="?page=1">1</a>
+    <% } %>
+    <% if (currentPage > 3 && currentPage !== 1) { %> 
+        <span style="font-size: 25px;">...</span>
+    <% } %>              
+    <% if (hasPrevPage) { %>
+        <a href="?page=<%= prevPage %>"><%= prevPage %></a>
+    <% } %>  
+    <a href="?page=<%= currentPage %>" class="active"><%= currentPage %></a>
+    <% if (hasNextPage) { %>
+        <a href="?page=<%= nextPage %>"><%= nextPage %></a>
+    <% } %>
+    <% if (lastPage - prevPage > 1 && nextPage !== lastPage) { %>
+        <% if (lastPage - currentPage === 2) { %>
+            <span></span>
+        <% } else { %>
+            <span style="font-size: 25px;">...</span>
+        <% } %>
+    <% } %>
+    <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+        <a href="?page=<%= lastPage %>"><%= lastPage %></a>
+    <% } %>            
+</section>

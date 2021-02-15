@@ -236,8 +236,37 @@ button:active {
 	color: #00695c;
 }
 
+.pagination {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.pagination a {
+	text-decoration: none;
+	color: #00695c;
+	padding: 8px 13px 8px 13px;
+	border: 1px solid #00695c;
+	margin: 0 0.5rem;
+}
+
+.pagination a:hover,
+.pagination a:active,
+.pagination a.active {
+	background: #00695c;
+	color: white;
+}
+
 @media (max-width: 374px) {
 	.main-header__nav {
 		font-size: 13px;
+	}
+}
+
+@media (max-width: 500px) {
+	.main-header__nav {
+		justify-content: normal;
+	}
+	.login {
+		right: 0 !important;
 	}
 }
