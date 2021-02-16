@@ -1,5 +1,5 @@
 const Product = require('../models/product');
-const ITEMS_IN_PAGE = 3;
+const ITEMS_IN_PAGE = 6;
 
 const product = (req, res, next) => {
     const { title, image, description, price } = req.body;
@@ -81,9 +81,10 @@ const postEditProductPage = (req, res, next) => {
 };
 
 const postDeleteProduct = (req, res, next) => {
-    const id = req.body.id;
+    const id = req.params.id;
     Product.findByIdAndRemove(id)
-        .then(() => res.redirect('/admin/products'))
+        .then(() => res.status(200).json({ message: "Success" }))
+        .catch(() => res.status(500).json({ message: "Deleting failed" }))
 };
 
 const editProductPage = (req, res, next) => {

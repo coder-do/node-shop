@@ -40,9 +40,9 @@ const postAuth = (req, res, next) => {
                     }
                     if (email !== 'admin') {
                         req.flash('error', 'Invalid email or password. Try again');
-                        res.redirect('/login')
+                        return res.redirect('/login')
                     } else {
-                        res.redirect('/admin')
+                        return res.redirect('/admin')
                     }
                 })
         })
