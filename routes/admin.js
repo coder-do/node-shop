@@ -19,7 +19,7 @@ adminRouter.get('/edit-product/:id', isAdmin, editProductPage);
 
 adminRouter.post('/edit-product', isAdmin, postEditProductPage);
 
-adminRouter.post('/delete-product', isAdmin, postDeleteProduct);
+adminRouter.delete('/delete-product/:id', isAdmin, postDeleteProduct);
 
 adminRouter.get('/', getAdmin);
 

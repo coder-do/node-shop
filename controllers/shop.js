@@ -2,7 +2,7 @@ const Product = require('../models/product');
 const Order = require('../models/order');
 const PDFDocument = require('pdfkit');
 
-const ITEMS_IN_PAGE = 3;
+const ITEMS_IN_PAGE = 6;
 
 const shopPage = (req, res, next) => {
     const page = +req.query.page || 1;
