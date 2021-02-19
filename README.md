@@ -1,5 +1,5 @@
 # Node.js project
 
-## node-shop-webapp environment is working version
+## `node-shop-webapp` environment is working version
 
-## production environment is not working
+## `production` environment is not working
