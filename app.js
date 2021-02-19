@@ -6,8 +6,6 @@ const fs = require('fs');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 
-const https = require('https');
-
 const csurf = require('csurf');
 const flash = require('connect-flash');
 
@@ -36,9 +34,6 @@ const log = fs.createWriteStream(
 app.use(morgan('combined', { stream: log }));
 
 const csrf = csurf();
-
-const privateKey = fs.readFileSync('server.key');
-const certificate = fs.readFileSync('server.cert')
 
 const store = new MongoStore({
     uri: process.env.DB_HOST,
@@ -82,13 +77,11 @@ app.use(router);
 app.use(authRouter);
 app.use(errorRouter);
 
-
-
 app.use(helmet());
 app.use(compression());
 
 mongoose.connect(process.env.DB_HOST)
     .then(() => {
-        https.createServer({ key: privateKey, cert: certificate }, app).listen(process.env.PORT || 3000);
+        app.listen(process.env.PORT || 3000);
     })
     .catch(err => console.log(err))

@@ -1,5 +1,9 @@
 # dependencies
 /node_modules
 
+# prod
+server.cert
+server.key
+
 # data
 /data
