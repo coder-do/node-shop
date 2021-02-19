@@ -13,8 +13,6 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 
-require('dotenv').config();
-
 const mongoose = require('mongoose');
 
 const { adminRouter } = require('./routes/admin');
