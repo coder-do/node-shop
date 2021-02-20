@@ -1,6 +1,0 @@
-{
-	"env": {
-		"DB_HOST": "mongodb+srv://coder-do:coder-do@cluster0.rwygg.mongodb.net/node-shop?retryWrites=true&w=majority",
-		"SENDGRID_API_KEY": "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"
-	}
-}

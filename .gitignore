@@ -4,6 +4,7 @@
 # prod
 server.cert
 server.key
+nodemon.json
 
 # data
 /data
